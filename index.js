@@ -19,7 +19,8 @@ const iauction = ({
   const auction = setInterval(() => {
     let status = { start: null, time: "", reps: 0 };
     const now = +`${Date.now()}`.slice(0, -2);
-    if (now > new Date(endDate).getTime()) {
+    const end = +`${new Date(endDate).getTime()}`.slice(0, -2);
+    if (now > end) {
       status.start = false;
       clearInterval(auction);
     }
@@ -31,7 +32,7 @@ const iauction = ({
         next.setMinutes(status.reps * repsInMinutes + repsInMinutes);
       }
       // console.log(next.getTime(), current.getTime(), startAuction.getTime()) // debug
-      status.start = getRepition(startAuction.getTime()) >= 0 ? true : false;
+      status.start = now > end ? false : true;
       status.reps = getRepition(startAuction.getTime());
       let minutes =
         Math.ceil(
@@ -43,7 +44,7 @@ const iauction = ({
           ? repsInMinutes
           : seconds
           ? -1
-          : 0);
+          : repsInMinutes);
 
       status.time = `${minutes < 10 && minutes >= 0 ? "0" : ""}${minutes}:${
         seconds < 10 && seconds >= 0 ? "0" : ""

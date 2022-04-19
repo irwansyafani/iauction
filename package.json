@@ -1,6 +1,6 @@
 {
   "name": "iauction",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "helps you watch your countdown",
   "main": "index.js",
   "keywords": [],
