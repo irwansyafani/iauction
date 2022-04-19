@@ -55,7 +55,7 @@ iauction({
   <ul> 
     <li>Create feature on your local machine and make sure it's work</li> 
     <li>Don't forget to put documentation and also test case to help me use your feature</li> 
-    <li>Make a <a href="https://github.com/irwansyafani/iauction/pulls" >request</a> from your branch <i>([username]-[feature_name])</i> to branch <i>master</i></li>
+    <li>Make a <a href="https://github.com/irwansyafani/iauction/pulls" >request</a> from your branch <i>([username]-[feature_name])</i> to branch <i>features</i></li>
   </ul> 
 
   ✏️ notes: please create your branch by following this format: ([username]-[feature_name])
