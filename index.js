@@ -34,9 +34,16 @@ const iauction = ({
       status.start = getRepition(startAuction.getTime()) >= 0 ? true : false;
       status.reps = getRepition(startAuction.getTime());
       let minutes =
-        Math.floor(
+        Math.ceil(
           ((next.getTime() - current.getTime()) / 1e3 / 60) % repsInMinutes
-        ) + (status.start ? repsInMinutes : 0);
+        ) +
+        (status.start && seconds
+          ? repsInMinutes - 1
+          : status.start
+          ? repsInMinutes
+          : seconds
+          ? -1
+          : 0);
 
       status.time = `${minutes < 10 && minutes >= 0 ? "0" : ""}${minutes}:${
         seconds < 10 && seconds >= 0 ? "0" : ""
