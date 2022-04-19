@@ -31,20 +31,34 @@ const iauction = ({
         next = new Date(next.setHours(current.getHours()));
         next.setMinutes(status.reps * repsInMinutes + repsInMinutes);
       }
-      // console.log(next.getTime(), current.getTime(), startAuction.getTime()) // debug
-      status.start = now > end ? false : true;
+      status.start =
+        now > end || getRepition(startAuction.getTime()) < 0 ? false : true;
       status.reps = getRepition(startAuction.getTime());
-      let minutes =
-        Math.ceil(
-          ((next.getTime() - current.getTime()) / 1e3 / 60) % repsInMinutes
-        ) +
-        (status.start && seconds
-          ? repsInMinutes - 1
-          : status.start
-          ? repsInMinutes
-          : seconds
-          ? -1
-          : repsInMinutes);
+      let minutes = Math.floor(
+        ((next.getTime() - current.getTime()) / 1e3 / 60) % repsInMinutes
+      );
+
+      if (status.start && seconds == 0 && minutes == 0) {
+        if (minutes !== 0) {
+          minutes += repsInMinutes;
+        } else if (!status.reps) {
+          minutes += 1;
+        }
+      } else if (status.start && seconds == 0) {
+        minutes = status.start
+          ? minutes == -repsInMinutes
+            ? minutes + repsInMinutes + 1
+            : repsInMinutes
+          : minutes < 0
+          ? minutes + repsInMinutes
+          : minutes;
+      } else if (!status.start) {
+        minutes = 0;
+      } else {
+        if (minutes < 0) {
+          minutes += repsInMinutes;
+        }
+      }
 
       status.time = `${minutes < 10 && minutes >= 0 ? "0" : ""}${minutes}:${
         seconds < 10 && seconds >= 0 ? "0" : ""

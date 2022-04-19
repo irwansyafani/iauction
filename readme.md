@@ -1,4 +1,4 @@
-# iAuction v0.0.5
+# iAuction v0.0.6
 
 Helps you watch your countdown
 
