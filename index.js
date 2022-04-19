@@ -18,11 +18,12 @@ const iauction = ({
 
   const auction = setInterval(() => {
     let status = { start: null, time: "", reps: 0 };
-    if (Date.now() > new Date(endDate).getTime()) {
+    const now = +`${Date.now()}`.slice(0, -2);
+    if (now > new Date(endDate).getTime()) {
       status.start = false;
       clearInterval(auction);
     }
-    if (!(Date.now() % 1e3)) {
+    if (now % 10 < 4) {
       const current = new Date();
       const seconds = 60 - (current.getUTCSeconds() || 60);
       if (next.getTime() < current.getTime()) {
@@ -46,7 +47,7 @@ const iauction = ({
       }
       callback(status);
     }
-  }, 1);
+  }, 100);
 };
 
 module.exports = iauction;
