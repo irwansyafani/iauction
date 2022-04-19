@@ -1,0 +1,15 @@
+{
+  "name": "iauction",
+  "version": "0.0.2",
+  "description": "helps you watch your countdown",
+  "main": "index.js",
+  "keywords": [],
+  "repository": {
+    "type": "npm",
+    "url": "https://github.com/irwansyafani/iauction"
+  },
+  "author": {
+    "name": "irwansyafani",
+    "url": "https://irwansyafani.com"
+  }
+}
