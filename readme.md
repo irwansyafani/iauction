@@ -1,4 +1,4 @@
-# iAuction v0.0.6
+# iAuction v0.0.7
 
 Helps you watch your countdown
 
@@ -19,12 +19,19 @@ yarn add iauction
 ## Usage
 
 ```js
-import iauction from "iauction" // const auctionIs = require("iauction")
+import iauction from "iauction" // const iauction = require("iauction")
 ...
 iauction({
   countdownInMin: 1,
   startDate: "2022-04-19 04:45:00",
   endDate: "2022-04-19 04:46:00",
+  callback: (time) => console.log(time),
+});
+// sometime in different browser has their own type of date so to make it works on Safari you may use:
+iauction({
+  countdownInMin: 1,
+  startDate: "2022/04/19 04:45:00",
+  endDate: "2022/04/19 04:46:00",
   callback: (time) => console.log(time),
 });
 ```
@@ -35,7 +42,6 @@ iauction({
 | `startDate`      | `string`   | when to start, basically the timer always do their job, but `start` and `reps` will tell you is the status was `start` (_boolean_) and how many repetition (`reps`) left until the status `start` change to `true` | use your **local time** and set with the format (`YYYY-MM-DD HH:mm:ss`) this will be convert to universal time in the system             |
 | `endDate`        | `string`   | when the countdown should stop and don't call your `callback` again                                                                                                                                                | use your **local time** and set with the format (`YYYY-MM-DD HH:mm:ss`) this will be convert to universal time in the system             |
 | `callback`       | `function` | this function will return the `{ start: [boolean], time: [string], reps: [integer] }`                                                                                                                              | `start`: indicates is now time to start?, `time`: indicates the countdown, `reps`: how many repetition has been through from `startDate` |
-
 
 ## Why `iAuction`?
 
@@ -56,7 +62,8 @@ iauction({
     <li>Create feature on your local machine and make sure it's work</li> 
     <li>Don't forget to put documentation and also test case to help me use your feature</li> 
     <li>Make a <a href="https://github.com/irwansyafani/iauction/pulls" >request</a> from your branch <i>([username]-[feature_name])</i> to branch <i>features</i></li>
-  </ul> 
+  </ul>
 
-  ✏️ notes: please create your branch by following this format: ([username]-[feature_name])
+✏️ notes: please create your branch by following this format: ([username]-[feature_name])
+
 </div>
