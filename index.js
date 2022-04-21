@@ -1,7 +1,7 @@
 const iauction = ({
   countdownInMin: repsInMinutes = 2,
-  startDate: initialDate,
-  endDate,
+  startDate: initialDate = "",
+  endDate = "",
   callback = () => {},
 }) => {
   const getRepition = (startAuction) => {
@@ -12,8 +12,10 @@ const iauction = ({
     return calculation;
   };
 
-  const startAuction = new Date(initialDate);
-  let next = new Date(initialDate);
+  const startAuction = new Date(
+    initialDate.replaceAll("-", "/") || initialDate
+  );
+  let next = new Date(initialDate.replaceAll("-", "/") || initialDate);
   next.setMinutes(next.getMinutes() + repsInMinutes);
 
   const auction = setInterval(() => {
@@ -48,16 +50,21 @@ const iauction = ({
         minutes = status.start
           ? minutes == -repsInMinutes
             ? minutes + repsInMinutes + 1
-            : repsInMinutes
+            : status.reps
+            ? minutes + repsInMinutes + 1
+            : minutes + 1
           : minutes < 0
           ? minutes + repsInMinutes
           : minutes;
       } else if (!status.start) {
-        minutes = 0;
-      } else {
-        if (minutes < 0) {
-          minutes += repsInMinutes;
+        if (!seconds) {
+          minutes += 1;
         }
+      } else if (status.start && minutes < 0) {
+        minutes += repsInMinutes;
+      }
+      if (minutes > repsInMinutes) {
+        minutes -= repsInMinutes;
       }
 
       status.time = `${minutes < 10 && minutes >= 0 ? "0" : ""}${minutes}:${
