@@ -1,4 +1,4 @@
-# iAuction v0.0.7
+# iAuction v0.0.8
 
 Helps you watch your countdown
 
@@ -23,15 +23,8 @@ import iauction from "iauction" // const iauction = require("iauction")
 ...
 iauction({
   countdownInMin: 1,
-  startDate: "2022-04-19 04:45:00",
-  endDate: "2022-04-19 04:46:00",
-  callback: (time) => console.log(time),
-});
-// sometime in different browser has their own type of date so to make it works on Safari you may use:
-iauction({
-  countdownInMin: 1,
-  startDate: "2022/04/19 04:45:00",
-  endDate: "2022/04/19 04:46:00",
+  startDate: "2022/04/21 10:34:33",
+  endDate: "2022/04/21 10:34:33",
   callback: (time) => console.log(time),
 });
 ```
