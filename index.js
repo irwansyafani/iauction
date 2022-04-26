@@ -12,27 +12,17 @@ const iauction = ({
     return calculation;
   };
 
-  const startAuction = new Date(
-    initialDate.replaceAll("-", "/") || initialDate
-  );
-  let next = new Date(initialDate.replaceAll("-", "/") || initialDate);
+  const startAuction = new Date(initialDate);
+  let next = new Date(initialDate);
   next.setMinutes(next.getMinutes() + repsInMinutes);
 
   const auction = setInterval(() => {
     let status = { start: null, time: "", reps: 0 };
     const now = +`${Date.now()}`.slice(0, -2);
     const end = +`${new Date(endDate).getTime()}`.slice(0, -2);
-    if (now > end) {
-      status.start = false;
-      clearInterval(auction);
-    }
     if (now % 10 < 4) {
       const current = new Date();
       const seconds = 60 - (current.getUTCSeconds() || 60);
-      if (next.getTime() < current.getTime()) {
-        next = new Date(next.setHours(current.getHours()));
-        next.setMinutes(status.reps * repsInMinutes + repsInMinutes);
-      }
       status.start =
         now > end || getRepition(startAuction.getTime()) < 0 ? false : true;
       status.reps = getRepition(startAuction.getTime());
@@ -66,6 +56,9 @@ const iauction = ({
       if (minutes > repsInMinutes) {
         minutes -= repsInMinutes;
       }
+      if (minutes < 0) {
+        minutes += 1;
+      }
 
       status.time = `${minutes < 10 && minutes >= 0 ? "0" : ""}${minutes}:${
         seconds < 10 && seconds >= 0 ? "0" : ""
@@ -75,6 +68,10 @@ const iauction = ({
         next.setMinutes(next.getMinutes() + repsInMinutes);
       }
       callback(status);
+    }
+    if (now > end) {
+      status.start = false;
+      clearInterval(auction);
     }
   }, 100);
 };
