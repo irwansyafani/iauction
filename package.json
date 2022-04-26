@@ -1,9 +1,17 @@
 {
   "name": "iauction",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "helps you watch your countdown",
   "main": "index.js",
-  "keywords": [],
+  "keywords": [
+    "auction",
+    "nft",
+    "dutch auction",
+    "timer",
+    "dutch",
+    "countdown",
+    "iauction"
+  ],
   "repository": {
     "type": "npm",
     "url": "https://github.com/irwansyafani/iauction"
